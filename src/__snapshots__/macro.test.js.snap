@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`tw prop - complex 1`] = `
+"import { tw } from \\"twind\\";
+const complex = <button className={tw([\\"bg-blue-500\\", condition && \\"text-white\\", {
+  'leading-none': true
+}])} />;"
+`;
+
+exports[`tw prop - simple 1`] = `
+"import { tw } from \\"twind\\";
+const simple = <button className={tw(\\"bg-blue-500\\")} />;"
+`;

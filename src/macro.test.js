@@ -2,19 +2,41 @@
 const { transform } = require("@babel/core")
 const { join } = require("path")
 
-const input = `
-import "./macro"
+test("tw prop - simple", () => {
+	const input = `
+	import "./macro"
+	const simple = <button tw="bg-blue-500" />
+	`
 
-const simple = <button tw="bg-blue-500" />
+	expect(getAst(input)).toMatchSnapshot()
+})
 
-const complex = <button tw={["bg-blue-500", condition && "text-white", { 'leading-none': true }]} />
-`
+test("tw prop - complex", () => {
+	const input = `
+	import "./macro"
+	const complex = (
+		<button
+			tw={[
+				"bg-blue-500",
+				condition && "text-white",
+				{ 'leading-none': true },
+			]}
+		/>
+	)
+	`
 
-/** @type {import('@babel/core').TransformOptions} */
-const options = {
-	presets: ["@babel/react"],
-	plugins: ["macros"],
-	filename: join(__dirname, "testfile.js"),
+	expect(getAst(input)).toMatchSnapshot()
+})
+
+/**
+ * @param {string} code
+ */
+function getAst(code) {
+	/** @type {import('@babel/core').TransformOptions} */
+	const options = {
+		presets: [],
+		plugins: ["@babel/syntax-jsx", "macros"],
+		filename: join(__dirname, "testfile.js"),
+	}
+	return transform(code, options).code
 }
-
-console.log(transform(input, options).code)
