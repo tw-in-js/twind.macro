@@ -33,9 +33,14 @@ test("existing tw import", () => {
 })
 
 test("className merging", () => {
-	const result = render(<button className="bg-blue-500" tw="text-red-500" />)
+	const result = render(
+		<button className="some-third-party-class" tw="text-red-500" />,
+	)
 
-	expect(result.container.firstChild).toHaveClass("bg-blue-500 text-red-500", {
-		exact: true,
-	})
+	expect(result.container.firstChild).toHaveClass(
+		"some-third-party-class text-red-500",
+		{
+			exact: true,
+		},
+	)
 })
