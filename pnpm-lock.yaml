@@ -3,14 +3,12 @@ dependencies:
   babel-plugin-macros: 3.0.1
 devDependencies:
   '@babel/core': 7.12.10
-  '@babel/plugin-syntax-jsx': 7.12.1_@babel+core@7.12.10
   '@babel/preset-env': 7.12.11_@babel+core@7.12.10
   '@babel/preset-react': 7.12.10_@babel+core@7.12.10
   '@testing-library/jest-dom': 5.11.8
   '@testing-library/react': 11.2.2_react-dom@17.0.1+react@17.0.1
   '@types/jest': 26.0.19
   '@types/node': 14.14.19
-  babel-plugin-tester: 10.0.0_@babel+core@7.12.10
   jest: 26.6.3
   react: 17.0.1
   react-dom: 17.0.1_react@17.0.1
@@ -1295,13 +1293,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-Fi2GPlNuqaw6oIa3kQSyJx7NiUw9X1XU9af28L4nu+klsDLJyBYoIRIshQW/BQ7/N4R0vPcfyZEZLrVYRoVsfg==
-  /@types/babel-plugin-tester/9.0.1:
-    dependencies:
-      '@types/babel__core': 7.1.12
-      '@types/prettier': 2.1.6
-    dev: true
-    resolution:
-      integrity: sha512-RGZzADCDXd9MIxQzOM2I6guMFRtZw+XwVx+vmPliPAvGeh228ZYA3hoTEF9u3jNR2Nf/gyb55HI3D9pMl3m1LA==
   /@types/babel__core/7.1.12:
     dependencies:
       '@babel/parser': 7.12.11
@@ -1617,21 +1608,6 @@ packages:
       npm: '>=6'
     resolution:
       integrity: sha512-CKt4+Oy9k2wiN+hT1uZzOw7d8zb1anbQpf7KLwaaXRCi/4pzKdFKHf7v5mvoPmjkmxshh7eKZQuRop06r5WP4w==
-  /babel-plugin-tester/10.0.0_@babel+core@7.12.10:
-    dependencies:
-      '@babel/core': 7.12.10
-      '@types/babel-plugin-tester': 9.0.1
-      lodash.mergewith: 4.6.2
-      prettier: 2.2.1
-      strip-indent: 3.0.0
-    dev: true
-    engines:
-      node: '>=10.13'
-      npm: '>=6'
-    peerDependencies:
-      '@babel/core': ^7.11.6
-    resolution:
-      integrity: sha512-RHlDIUtfdlFvUXHTWroyL3iz9OZnPYgcaDIUrp4ejXrzSClRx3ldJlhaOauvblJqZEPb/7HR32gLZT45lgOXFg==
   /babel-preset-current-node-syntax/1.0.1_@babel+core@7.12.10:
     dependencies:
       '@babel/core': 7.12.10
@@ -3482,10 +3458,6 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-t7hw9pI+WvuwNJXwk5zVHpyhIqzg2qTlklJOf0mVxGSbe3Fp2VieZcduNYjaLDoy6p9uGpQEGWG87WpMKlNq8g==
-  /lodash.mergewith/4.6.2:
-    dev: true
-    resolution:
-      integrity: sha512-GK3g5RPZWTRSeLSpgP8Xhra+pnjBC56q9FZYe1d5RN3TJ35dbkGy3YqBSMbyCrlbi+CM9Z3Jk5yTL7RCsqboyQ==
   /lodash.sortby/4.7.0:
     dev: true
     resolution:
@@ -3941,13 +3913,6 @@ packages:
       node: '>= 0.8.0'
     resolution:
       integrity: sha1-IZMqVJ9eUv/ZqCf1cOBL5iqX2lQ=
-  /prettier/2.2.1:
-    dev: true
-    engines:
-      node: '>=10.13.0'
-    hasBin: true
-    resolution:
-      integrity: sha512-PqyhM2yCjg/oKkFPtTGUojv7gnZAoG80ttl45O6x2Ug/rMJw4wcc9k6aaf2hibP7BGVCCM33gZoGjyvt9mm16Q==
   /pretty-format/26.6.2:
     dependencies:
       '@jest/types': 26.6.2
@@ -5028,7 +4993,6 @@ packages:
       integrity: sha512-aePbxDmcYW++PaqBsJ+HYUFwCdv4LVvdnhBy78E57PIor8/OVvhMrADFFEDh8DHDFRv/O9i3lPhsENjO7QX0+A==
 specifiers:
   '@babel/core': ^7.12.10
-  '@babel/plugin-syntax-jsx': ^7.12.1
   '@babel/preset-env': ^7.12.11
   '@babel/preset-react': ^7.12.10
   '@testing-library/jest-dom': ^5.11.8
@@ -5038,7 +5002,6 @@ specifiers:
   '@types/node': ^14.14.19
   '@types/react': '*'
   babel-plugin-macros: ^3.0.1
-  babel-plugin-tester: ^10.0.0
   jest: ^26.6.3
   react: ^17.0.1
   react-dom: ^17.0.1
