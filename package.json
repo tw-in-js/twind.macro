@@ -1,6 +1,6 @@
 {
 	"name": "twind.macro",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "",
 	"main": "src/macro.js",
 	"types": "types/index.d.ts",
