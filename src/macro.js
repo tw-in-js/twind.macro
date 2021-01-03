@@ -16,14 +16,16 @@ module.exports = createMacro(function twindMacro({
 					? assertNotJSXEmpty(value.expression, t)
 					: value
 
-				const fnCall = t.callExpression(t.identifier("tw"), [newValue])
+				if (newValue) {
+					const fnCall = t.callExpression(t.identifier("tw"), [newValue])
 
-				path.replaceWith(
-					t.jsxAttribute(
-						t.jsxIdentifier("className"),
-						t.jsxExpressionContainer(fnCall),
-					),
-				)
+					path.replaceWith(
+						t.jsxAttribute(
+							t.jsxIdentifier("className"),
+							t.jsxExpressionContainer(fnCall),
+						),
+					)
+				}
 			}
 		},
 	})
