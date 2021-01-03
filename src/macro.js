@@ -1,11 +1,13 @@
 // @ts-check
 const { createMacro } = require("babel-plugin-macros")
+const { localName } = require("./constants")
 
 module.exports = createMacro(function twindMacro({
 	state,
 	babel: { types: t },
 }) {
 	const program = state.file.path
+
 	program.traverse({
 		JSXAttribute(path) {
 			const attributeName = path.node.name.name
@@ -17,7 +19,7 @@ module.exports = createMacro(function twindMacro({
 					: value
 
 				if (newValue) {
-					const fnCall = t.callExpression(t.identifier("tw"), [newValue])
+					const fnCall = t.callExpression(t.identifier(localName), [newValue])
 
 					path.replaceWith(
 						t.jsxAttribute(
@@ -32,7 +34,7 @@ module.exports = createMacro(function twindMacro({
 
 	program.node.body.unshift(
 		t.importDeclaration(
-			[t.importSpecifier(t.identifier("tw"), t.identifier("tw"))],
+			[t.importSpecifier(t.identifier(localName), t.identifier("tw"))],
 			t.stringLiteral("twind"),
 		),
 	)

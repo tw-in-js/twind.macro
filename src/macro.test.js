@@ -8,7 +8,7 @@ test("tw prop - simple", () => {
 	const simple = <button tw="bg-blue-500" />
 	`
 
-	expect(transpile(input)).toMatchSnapshot()
+	expect(transpile(input)?.code).toMatchSnapshot()
 })
 
 test("tw prop - complex", () => {
@@ -25,10 +25,19 @@ test("tw prop - complex", () => {
 	)
 	`
 
-	expect(transpile(input)).toMatchSnapshot()
+	expect(transpile(input)?.code).toMatchSnapshot()
 })
 
-test.todo("doesn't add twind import if one already exists")
+test("doesn't conflict with the existing import", () => {
+	const input = `
+	import { tw } from "twind"
+	import "./macro"
+	const buttonStyle = tw\`bg-blue-500\`
+	const simple = <button tw={[buttonStyle, "text-white"]} />
+	`
+
+	expect(transpile(input)?.code).toMatchSnapshot()
+})
 
 test.todo("merges existing `className` prop with `tw` prop")
 
@@ -38,9 +47,8 @@ test.todo("merges existing `className` prop with `tw` prop")
 function transpile(code) {
 	/** @type {import('@babel/core').TransformOptions} */
 	const options = {
-		presets: [],
 		plugins: ["@babel/syntax-jsx", "macros"],
 		filename: join(__dirname, "testfile.js"),
 	}
-	return transform(code, options).code
+	return transform(code, options)
 }
