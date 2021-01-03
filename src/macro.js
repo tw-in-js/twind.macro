@@ -1,6 +1,7 @@
 // @ts-check
 const { createMacro } = require("babel-plugin-macros")
 const { localName } = require("./constants")
+const { raise } = require("./helpers")
 
 module.exports = createMacro(function twindMacro({
 	state,
@@ -9,27 +10,95 @@ module.exports = createMacro(function twindMacro({
 	const program = state.file.path
 
 	program.traverse({
-		JSXAttribute(path) {
-			const attributeName = path.node.name.name
-			if (attributeName === "tw") {
-				const value = path.node.value
+		JSXOpeningElement(path) {
+			const attributeList = path.get("attributes")
 
-				const newValue = t.isJSXExpressionContainer(value)
-					? assertNotJSXEmpty(value.expression, t)
-					: value
-
-				if (newValue) {
-					const fnCall = t.callExpression(t.identifier(localName), [newValue])
-
-					path.replaceWith(
-						t.jsxAttribute(
-							t.jsxIdentifier("className"),
-							t.jsxExpressionContainer(fnCall),
-						),
-					)
+			/**
+			 * @param {string} name
+			 * @returns {babel.NodePath<babel.types.JSXAttribute> | undefined}
+			 */
+			const getAttribute = (name) => {
+				for (const attribute of attributeList) {
+					if (attribute.isJSXAttribute()) {
+						const nodeName = attribute.node.name
+						if (t.isJSXIdentifier(nodeName) && nodeName.name === name) {
+							return attribute
+						}
+					}
 				}
 			}
+
+			/**
+			 * @param {babel.NodePath<babel.types.JSXAttribute>} attributePath
+			 */
+			const getAttributeValue = (attributePath) => {
+				const attributeValue =
+					attributePath.node.value ??
+					raise(
+						`Unexpected error: ` +
+							`JSX attribute "${attributePath.node.name.name}" has no value`,
+					)
+
+				return t.isJSXExpressionContainer(attributeValue)
+					? assertNotJSXEmpty(attributeValue.expression, t)
+					: attributeValue
+			}
+
+			const twAttribute = getAttribute("tw")
+			if (!twAttribute) return
+
+			const twAttributeValue = getAttributeValue(twAttribute)
+			const twCall = t.callExpression(t.identifier(localName), [
+				twAttributeValue,
+			])
+
+			const classAttribute = getAttribute("className")
+
+			const classAttributeValue =
+				classAttribute && getAttributeValue(classAttribute)
+
+			const newAttributeValue = classAttributeValue
+				? t.templateLiteral(
+						[
+							t.templateElement({ raw: "" }),
+							t.templateElement({ raw: " " }),
+							t.templateElement({ raw: "" }),
+						],
+						[classAttributeValue, twCall],
+				  )
+				: twCall
+
+			twAttribute.remove()
+			classAttribute?.remove()
+
+			path.node.attributes.push(
+				t.jsxAttribute(
+					t.jsxIdentifier("className"),
+					t.jsxExpressionContainer(newAttributeValue),
+				),
+			)
 		},
+		// JSXAttribute(path) {
+		// 	const attributeName = path.node.name.name
+		// 	if (attributeName === "tw") {
+		// 		const value = path.node.value
+
+		// 		const newValue = t.isJSXExpressionContainer(value)
+		// 			? assertNotJSXEmpty(value.expression, t)
+		// 			: value
+
+		// 		if (newValue) {
+		// 			const fnCall = t.callExpression(t.identifier(localName), [newValue])
+
+		// 			path.replaceWith(
+		// 				t.jsxAttribute(
+		// 					t.jsxIdentifier("className"),
+		// 					t.jsxExpressionContainer(fnCall),
+		// 				),
+		// 			)
+		// 		}
+		// 	}
+		// },
 	})
 
 	program.node.body.unshift(
