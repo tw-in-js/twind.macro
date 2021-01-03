@@ -1,0 +1,8 @@
+{
+	"compilerOptions": {
+		"target": "es2020",
+		"strict": true,
+		"checkJs": true
+	},
+	"include": ["src", "types"]
+}
