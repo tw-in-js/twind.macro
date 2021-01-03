@@ -1,8 +1,8 @@
 dependencies:
-  '@babel/plugin-syntax-jsx': 7.12.1_@babel+core@7.12.10
   babel-plugin-macros: 3.0.1
 devDependencies:
   '@babel/core': 7.12.10
+  '@babel/plugin-syntax-jsx': 7.12.1_@babel+core@7.12.10
   '@babel/preset-react': 7.12.10_@babel+core@7.12.10
   '@types/babel-plugin-macros': 2.8.4
   '@types/jest': 26.0.19
@@ -102,6 +102,7 @@ packages:
     resolution:
       integrity: sha512-4tpbU0SrSTjjt65UMWSrUOPZTsgvPgGG4S8QSTNHacKzpS51IVWGDj0yCwyeZND/i+LSN2g/O63jEXEWm49sYQ==
   /@babel/helper-plugin-utils/7.10.4:
+    dev: true
     resolution:
       integrity: sha512-O4KCvQA6lLiMU9l2eawBPMf1xPP8xPfB3iEQw150hOVTqj/rfXz0ThTb4HEzqQfs2Bmo5Ay8BzxfzVtBrr9dVg==
   /@babel/helper-replace-supers/7.12.11:
@@ -199,6 +200,7 @@ packages:
     dependencies:
       '@babel/core': 7.12.10
       '@babel/helper-plugin-utils': 7.10.4
+    dev: true
     peerDependencies:
       '@babel/core': ^7.0.0-0
     resolution:
