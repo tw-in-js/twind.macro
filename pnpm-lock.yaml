@@ -1,10 +1,10 @@
 dependencies:
+  '@types/babel-plugin-macros': 2.8.4
   babel-plugin-macros: 3.0.1
 devDependencies:
   '@babel/core': 7.12.10
   '@babel/plugin-syntax-jsx': 7.12.1_@babel+core@7.12.10
   '@babel/preset-react': 7.12.10_@babel+core@7.12.10
-  '@types/babel-plugin-macros': 2.8.4
   '@types/jest': 26.0.19
   '@types/node': 14.14.19
   babel-plugin-tester: 10.0.0_@babel+core@7.12.10
@@ -145,7 +145,6 @@ packages:
     resolution:
       integrity: sha512-i6rgnR/YgPEQzZZnbTHHuZdlE8qyoBNalD6F+q4vAFlcMEcqmkoG+mPqJYJCo63qPf74+Y1UZsl3l6f7/RIkmA==
   /@babel/parser/7.12.11:
-    dev: true
     engines:
       node: '>=6.0.0'
     hasBin: true
@@ -355,7 +354,6 @@ packages:
       '@babel/helper-validator-identifier': 7.12.11
       lodash: 4.17.20
       to-fast-properties: 2.0.0
-    dev: true
     resolution:
       integrity: sha512-lnIX7piTxOH22xE7fDXDbSHg9MM1/6ORnafpJmov5rs0kX5g4BZxeXNJLXsMRiO0U5Rb8/FvMS6xlTnTHvxonQ==
   /@bcoe/v8-coverage/0.2.3:
@@ -587,7 +585,6 @@ packages:
   /@types/babel-plugin-macros/2.8.4:
     dependencies:
       '@types/babel__core': 7.1.12
-    dev: true
     resolution:
       integrity: sha512-Fi2GPlNuqaw6oIa3kQSyJx7NiUw9X1XU9af28L4nu+klsDLJyBYoIRIshQW/BQ7/N4R0vPcfyZEZLrVYRoVsfg==
   /@types/babel-plugin-tester/9.0.1:
@@ -604,26 +601,22 @@ packages:
       '@types/babel__generator': 7.6.2
       '@types/babel__template': 7.4.0
       '@types/babel__traverse': 7.11.0
-    dev: true
     resolution:
       integrity: sha512-wMTHiiTiBAAPebqaPiPDLFA4LYPKr6Ph0Xq/6rq1Ur3v66HXyG+clfR9CNETkD7MQS8ZHvpQOtA53DLws5WAEQ==
   /@types/babel__generator/7.6.2:
     dependencies:
       '@babel/types': 7.12.12
-    dev: true
     resolution:
       integrity: sha512-MdSJnBjl+bdwkLskZ3NGFp9YcXGx5ggLpQQPqtgakVhsWK0hTtNYhjpZLlWQTviGTvF8at+Bvli3jV7faPdgeQ==
   /@types/babel__template/7.4.0:
     dependencies:
       '@babel/parser': 7.12.11
       '@babel/types': 7.12.12
-    dev: true
     resolution:
       integrity: sha512-NTPErx4/FiPCGScH7foPyr+/1Dkzkni+rHiYHHoTjvwou7AQzJkNeD60A9CXRy+ZEN2B1bggmkTMCDb+Mv5k+A==
   /@types/babel__traverse/7.11.0:
     dependencies:
       '@babel/types': 7.12.12
-    dev: true
     resolution:
       integrity: sha512-kSjgDMZONiIfSH1Nxcr5JIRMwUetDki63FSQfpTCz8ogF3Ulqm8+mr5f78dUYs6vMiB6gBusQqfQmBvHZj/lwg==
   /@types/graceful-fs/4.1.4:
@@ -2661,7 +2654,6 @@ packages:
     resolution:
       integrity: sha1-7dFMgk4sycHgsKG0K7UhBRakJDg=
   /lodash/4.17.20:
-    dev: true
     resolution:
       integrity: sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
   /lru-cache/6.0.0:
@@ -3673,7 +3665,6 @@ packages:
     resolution:
       integrity: sha1-I2QN17QtAEM5ERQIIOXPRA5SHdE=
   /to-fast-properties/2.0.0:
-    dev: true
     engines:
       node: '>=4'
     resolution:
