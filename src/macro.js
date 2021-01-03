@@ -78,27 +78,6 @@ module.exports = createMacro(function twindMacro({
 				),
 			)
 		},
-		// JSXAttribute(path) {
-		// 	const attributeName = path.node.name.name
-		// 	if (attributeName === "tw") {
-		// 		const value = path.node.value
-
-		// 		const newValue = t.isJSXExpressionContainer(value)
-		// 			? assertNotJSXEmpty(value.expression, t)
-		// 			: value
-
-		// 		if (newValue) {
-		// 			const fnCall = t.callExpression(t.identifier(localName), [newValue])
-
-		// 			path.replaceWith(
-		// 				t.jsxAttribute(
-		// 					t.jsxIdentifier("className"),
-		// 					t.jsxExpressionContainer(fnCall),
-		// 				),
-		// 			)
-		// 		}
-		// 	}
-		// },
 	})
 
 	program.node.body.unshift(
