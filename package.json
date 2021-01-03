@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"description": "",
 	"main": "src/macro.js",
+	"types": "types/index.d.ts",
 	"scripts": {
 		"test": "jest"
 	},
