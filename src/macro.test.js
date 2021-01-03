@@ -8,7 +8,7 @@ test("tw prop - simple", () => {
 	const simple = <button tw="bg-blue-500" />
 	`
 
-	expect(getAst(input)).toMatchSnapshot()
+	expect(transpile(input)).toMatchSnapshot()
 })
 
 test("tw prop - complex", () => {
@@ -25,13 +25,17 @@ test("tw prop - complex", () => {
 	)
 	`
 
-	expect(getAst(input)).toMatchSnapshot()
+	expect(transpile(input)).toMatchSnapshot()
 })
+
+test.todo("doesn't add twind import if one already exists")
+
+test.todo("merges existing `className` prop with `tw` prop")
 
 /**
  * @param {string} code
  */
-function getAst(code) {
+function transpile(code) {
 	/** @type {import('@babel/core').TransformOptions} */
 	const options = {
 		presets: [],
