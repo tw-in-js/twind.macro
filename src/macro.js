@@ -2,8 +2,6 @@
 const { createMacro } = require("babel-plugin-macros")
 const { raise } = require("./helpers")
 
-const importNamespaceName = "__macro__tw__"
-
 module.exports = createMacro(function twindMacro({
 	state,
 	babel: { types: t },
@@ -49,13 +47,7 @@ module.exports = createMacro(function twindMacro({
 			if (!twAttribute) return
 
 			const twAttributeValue = getAttributeValue(twAttribute)
-			const twCall = t.callExpression(
-				t.memberExpression(
-					t.identifier(importNamespaceName),
-					t.identifier("tw"),
-				),
-				[twAttributeValue],
-			)
+			const twCall = t.callExpression(t.identifier("tw"), [twAttributeValue])
 
 			const classAttribute = getAttribute("className")
 
@@ -87,7 +79,7 @@ module.exports = createMacro(function twindMacro({
 
 	program.node.body.unshift(
 		t.importDeclaration(
-			[t.importNamespaceSpecifier(t.identifier(importNamespaceName))],
+			[t.importSpecifier(t.identifier("tw"), t.identifier("tw"))],
 			t.stringLiteral("twind"),
 		),
 	)
