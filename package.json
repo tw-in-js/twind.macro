@@ -1,25 +1,38 @@
 {
 	"name": "@twind/macro",
 	"version": "0.1.0",
-	"description": "",
+	"description": "A babel macro for twind, adds support for tw prop in jsx",
+	"homepage": "https://github.com/tw-in-js/twind.macro#readme",
+	"repository": "https://github.com/tw-in-js/twind.macro",
+	"bugs": "https://github.com/tw-in-js/twind.macro/issues",
+	"changelog": "https://github.com/tw-in-js/twind.macro/releases",
 	"main": "src/macro.js",
 	"types": "types/index.d.ts",
+	"files": [
+		"src",
+		"types"
+	],
+	"author": {
+		"name": "MapleLeaf",
+		"url": "https://github.com/itsMapleLeaf"
+	},
+	"keywords": [
+		"twind",
+		"tailwind",
+		"babel macro"
+	],
 	"scripts": {
 		"test": "jest"
 	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"dependencies": {
-		"@types/babel-plugin-macros": "^2.8.4",
-		"babel-plugin-macros": "^3.0.1"
-	},
+	"license": "MIT",
+	"dependencies": {},
 	"devDependencies": {
 		"@babel/core": "^7.12.10",
 		"@babel/preset-env": "^7.12.11",
 		"@babel/preset-react": "^7.12.10",
 		"@testing-library/jest-dom": "^5.11.8",
 		"@testing-library/react": "^11.2.2",
+		"@types/babel-plugin-macros": "^2.8.4",
 		"@types/jest": "^26.0.19",
 		"@types/node": "^14.14.19",
 		"@types/react": "^17.0.0",
@@ -29,7 +42,8 @@
 		"twind": "^0.11.0"
 	},
 	"peerDependencies": {
-		"twind": "*"
+		"twind": ">=0.11",
+		"babel-plugin-macros": ">=3"
 	},
 	"optionalDependencies": {
 		"@types/react": "*"
