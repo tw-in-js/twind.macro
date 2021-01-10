@@ -23,5 +23,5 @@ const Button = () => <button tw="bg-blue-500" />
 ## Todo
 
 - [ ] Publish package
-- [ ] Convert to TypeScript
+- [x] Convert to TypeScript
 - [ ] Code audit/cleanup, handle more edge cases
