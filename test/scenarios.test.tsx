@@ -1,7 +1,8 @@
 // @ts-check
+import "@testing-library/jest-dom"
 import { render } from "@testing-library/react"
 import { tw } from "twind"
-import "../src/macro"
+import ".."
 
 test("simple", () => {
 	const result = render(<button tw="bg-blue-500" />)
