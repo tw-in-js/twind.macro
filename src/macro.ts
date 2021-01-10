@@ -1,4 +1,3 @@
-// @ts-check
 import * as babel from "@babel/core"
 import { createMacro, MacroParams } from "babel-plugin-macros"
 import { raise } from "./helpers"
@@ -95,9 +94,6 @@ const getAttributeValue = (
 function assertNotJSXEmpty<T extends babel.types.Node>(
 	expression: T,
 ): Exclude<T, babel.types.JSXEmptyExpression> {
-	if (babel.types.isJSXEmptyExpression(expression)) {
-		throw new Error("JSX empty expressions are not allowed")
-	}
 	// @ts-expect-error
 	return babel.types.isJSXEmptyExpression(expression)
 		? raise("JSX empty expressions are not allowed")
