@@ -1,26 +1,26 @@
 import * as babel from "@babel/core"
 import { createMacro, MacroParams } from "babel-plugin-macros"
-import { raise } from "./helpers"
+import {
+	findJsxAttributeByName,
+	getJsxAttributeName,
+	getJsxAttributeValue,
+} from "./jsx-attribute"
 
 function twindMacro({ state }: MacroParams) {
 	const program = state.file.path
 
 	program.traverse({
 		JSXOpeningElement(path) {
-			const attributeList = path.get("attributes")
+			const twAttribute = findJsxAttributeByName(path.node, "tw")
+			const twAttributeValue = getJsxAttributeValue(twAttribute)
+			if (!twAttributeValue) return
 
-			const twAttribute = getAttribute(attributeList, "tw")
-			if (!twAttribute) return
-
-			const twAttributeValue = getAttributeValue(twAttribute)
 			const twCall = babel.types.callExpression(babel.types.identifier("tw"), [
 				twAttributeValue,
 			])
 
-			const classAttribute = getAttribute(attributeList, "className")
-
-			const classAttributeValue =
-				classAttribute && getAttributeValue(classAttribute)
+			const classAttribute = findJsxAttributeByName(path.node, "className")
+			const classAttributeValue = getJsxAttributeValue(classAttribute)
 
 			const newAttributeValue = classAttributeValue
 				? babel.types.templateLiteral(
@@ -33,15 +33,19 @@ function twindMacro({ state }: MacroParams) {
 				  )
 				: twCall
 
-			twAttribute.remove()
-			classAttribute?.remove()
-
-			path.node.attributes.push(
-				babel.types.jsxAttribute(
-					babel.types.jsxIdentifier("className"),
-					babel.types.jsxExpressionContainer(newAttributeValue),
-				),
-			)
+			path.node.attributes = path.node.attributes
+				// remove existing tw and className attributes
+				.filter((node) => {
+					const name = getJsxAttributeName(node)
+					return name !== "tw" && name !== "className"
+				})
+				// add new className attribute
+				.concat(
+					babel.types.jsxAttribute(
+						babel.types.jsxIdentifier("className"),
+						babel.types.jsxExpressionContainer(newAttributeValue),
+					),
+				)
 		},
 	})
 
@@ -59,43 +63,3 @@ function twindMacro({ state }: MacroParams) {
 }
 
 export default createMacro(twindMacro)
-
-const getAttribute = (
-	attributeList: Array<
-		babel.NodePath<babel.types.JSXAttribute | babel.types.JSXSpreadAttribute>
-	>,
-	name: string,
-): babel.NodePath<babel.types.JSXAttribute> | undefined => {
-	for (const attribute of attributeList) {
-		if (attribute.isJSXAttribute()) {
-			const nodeName = attribute.node.name
-			if (babel.types.isJSXIdentifier(nodeName) && nodeName.name === name) {
-				return attribute
-			}
-		}
-	}
-}
-
-const getAttributeValue = (
-	attributePath: babel.NodePath<babel.types.JSXAttribute>,
-) => {
-	const attributeValue =
-		attributePath.node.value ??
-		raise(
-			`Unexpected error: ` +
-				`JSX attribute "${attributePath.node.name.name}" has no value`,
-		)
-
-	return babel.types.isJSXExpressionContainer(attributeValue)
-		? assertNotJSXEmpty(attributeValue.expression)
-		: attributeValue
-}
-
-function assertNotJSXEmpty<T extends babel.types.Node>(
-	expression: T,
-): Exclude<T, babel.types.JSXEmptyExpression> {
-	// @ts-expect-error
-	return babel.types.isJSXEmptyExpression(expression)
-		? raise("JSX empty expressions are not allowed")
-		: expression
-}
