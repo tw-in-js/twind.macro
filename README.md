@@ -6,11 +6,11 @@ Enables the use of the `tw` prop, for use with [`twind`](https://github.com/tw-i
 
 ```jsx
 // before
-import { tw } from "twind"
+import { tw } from 'twind'
 const Button = () => <button className={tw`bg-blue-500`} />
 
 // after ✨
-import "@twind/macro"
+import '@twind/macro'
 const Button = () => <button tw="bg-blue-500" />
 ```
 
