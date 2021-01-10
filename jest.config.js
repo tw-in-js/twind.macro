@@ -1,3 +1,2 @@
-module.exports = {
-	setupFilesAfterEnv: ["./test/setup.js"],
-}
+/** @type {import('@jest/types').Config.InitialOptions} */
+module.exports = {}

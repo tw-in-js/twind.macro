@@ -1,7 +1,8 @@
 module.exports = {
 	presets: [
-		["@babel/preset-env", { targets: { node: "current" } }],
-		["@babel/preset-react", { runtime: "automatic" }],
+		"@babel/typescript",
+		["@babel/env", { targets: { node: "current" } }],
+		["@babel/react", { runtime: "automatic" }],
 	],
-	plugins: ["babel-plugin-macros"],
+	plugins: ["macros"],
 }
