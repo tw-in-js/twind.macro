@@ -9,7 +9,7 @@
 	"main": "dist/macro.js",
 	"types": "types/index.d.ts",
 	"files": [
-		"src",
+		"dist",
 		"types"
 	],
 	"author": {
