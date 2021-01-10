@@ -1,6 +1,17 @@
-import * as babel from '@babel/core'
+import { types } from '@babel/core'
 import { createMacro, MacroParams } from 'babel-plugin-macros'
 import { findJsxAttributeByName, getJsxAttributeName, getJsxAttributeValue } from './jsx-attribute'
+
+function createTwCall(value: types.Expression) {
+  if (types.isStringLiteral(value)) {
+    return types.taggedTemplateExpression(
+      types.identifier('tw'),
+      types.templateLiteral([types.templateElement({ raw: value.value })], []),
+    )
+  }
+
+  return types.callExpression(types.identifier('tw'), [value])
+}
 
 function twindMacro({ state }: MacroParams) {
   const program = state.file.path
@@ -11,17 +22,17 @@ function twindMacro({ state }: MacroParams) {
       const twAttributeValue = getJsxAttributeValue(twAttribute)
       if (!twAttributeValue) return
 
-      const twCall = babel.types.callExpression(babel.types.identifier('tw'), [twAttributeValue])
+      const twCall = createTwCall(twAttributeValue)
 
       const classAttribute = findJsxAttributeByName(path.node, 'className')
       const classAttributeValue = getJsxAttributeValue(classAttribute)
 
       const newAttributeValue = classAttributeValue
-        ? babel.types.templateLiteral(
+        ? types.templateLiteral(
             [
-              babel.types.templateElement({ raw: '' }),
-              babel.types.templateElement({ raw: ' ' }),
-              babel.types.templateElement({ raw: '' }),
+              types.templateElement({ raw: '' }),
+              types.templateElement({ raw: ' ' }),
+              types.templateElement({ raw: '' }),
             ],
             [classAttributeValue, twCall],
           )
@@ -35,18 +46,18 @@ function twindMacro({ state }: MacroParams) {
         })
         // add new className attribute
         .concat(
-          babel.types.jsxAttribute(
-            babel.types.jsxIdentifier('className'),
-            babel.types.jsxExpressionContainer(newAttributeValue),
+          types.jsxAttribute(
+            types.jsxIdentifier('className'),
+            types.jsxExpressionContainer(newAttributeValue),
           ),
         )
     },
   })
 
   program.node.body.unshift(
-    babel.types.importDeclaration(
-      [babel.types.importSpecifier(babel.types.identifier('tw'), babel.types.identifier('tw'))],
-      babel.types.stringLiteral('twind'),
+    types.importDeclaration(
+      [types.importSpecifier(types.identifier('tw'), types.identifier('tw'))],
+      types.stringLiteral('twind'),
     ),
   )
 }
