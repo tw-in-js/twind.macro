@@ -1,5 +1,3 @@
-**Not published yet** (remove this notice when it is!)
-
 # @twind/macro
 
 Enables the use of the `tw` prop, for use with [`twind`](https://github.com/tw-in-js/twind)
