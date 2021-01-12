@@ -24,7 +24,8 @@
   "scripts": {
     "build": "trash dist && tsc --project tsconfig.build.json",
     "test": "jest",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "release": "npx np"
   },
   "license": "MIT",
   "dependencies": {},
