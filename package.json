@@ -1,6 +1,6 @@
 {
   "name": "@twind/macro",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A babel macro for twind, adds support for tw prop in jsx",
   "homepage": "https://github.com/tw-in-js/twind.macro#readme",
   "repository": "https://github.com/tw-in-js/twind.macro",
