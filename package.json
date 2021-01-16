@@ -23,8 +23,8 @@
   ],
   "scripts": {
     "build": "trash dist && tsc --project tsconfig.build.json",
-    "test": "jest --watchAll",
-    "test-ci": "jest",
+    "test": "jest",
+    "test-watch": "jest --watchAll",
     "format": "prettier --write .",
     "release": "npx np"
   },
