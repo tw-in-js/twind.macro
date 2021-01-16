@@ -1,9 +1,11 @@
 import * as babel from '@babel/core'
+import annotateAsPure from '@babel/helper-annotate-as-pure'
 import { createMacro, MacroParams } from 'babel-plugin-macros'
 import { findJsxAttributeByName, getJsxAttributeName, getJsxAttributeValue } from './jsx-attribute'
 
-function twindMacro({ state }: MacroParams) {
+function twindMacro({ state, references }: MacroParams) {
   const program = state.file.path
+  const localImportName = program.scope.generateUid('tw')
 
   program.traverse({
     JSXOpeningElement(path) {
@@ -11,7 +13,10 @@ function twindMacro({ state }: MacroParams) {
       const twAttributeValue = getJsxAttributeValue(twAttribute)
       if (!twAttributeValue) return
 
-      const twCall = babel.types.callExpression(babel.types.identifier('tw'), [twAttributeValue])
+      const twCall = babel.types.callExpression(babel.types.identifier(localImportName), [
+        twAttributeValue,
+      ])
+      annotateAsPure(twCall)
 
       const classAttribute = findJsxAttributeByName(path.node, 'className')
       const classAttributeValue = getJsxAttributeValue(classAttribute)
@@ -43,9 +48,21 @@ function twindMacro({ state }: MacroParams) {
     },
   })
 
+  references['tw']?.forEach((path) => {
+    if (babel.types.isIdentifier(path.node)) {
+      path.node.name = localImportName
+    }
+    annotateAsPure(path.parent)
+  })
+
   program.node.body.unshift(
     babel.types.importDeclaration(
-      [babel.types.importSpecifier(babel.types.identifier('tw'), babel.types.identifier('tw'))],
+      [
+        babel.types.importSpecifier(
+          babel.types.identifier(localImportName),
+          babel.types.identifier('tw'),
+        ),
+      ],
       babel.types.stringLiteral('twind'),
     ),
   )

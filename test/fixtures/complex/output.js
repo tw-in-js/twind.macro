@@ -1,12 +1,14 @@
-import { tw } from 'twind'
+import { tw as _tw } from 'twind'
 export default (
   <button
-    className={tw([
-      'bg-blue-500',
-      condition && 'text-white',
-      {
-        'leading-none': true,
-      },
-    ])}
+    className={
+      /*#__PURE__*/ _tw([
+        'bg-blue-500',
+        condition && 'text-white',
+        {
+          'leading-none': true,
+        },
+      ])
+    }
   />
 )

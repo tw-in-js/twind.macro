@@ -23,13 +23,15 @@
   ],
   "scripts": {
     "build": "trash dist && tsc --project tsconfig.build.json",
-    "test": "jest",
+    "test": "jest --watchAll",
+    "test-ci": "jest",
     "format": "prettier --write .",
     "release": "npx np"
   },
   "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.12.10",
+    "@babel/helper-annotate-as-pure": "^7.12.10",
     "babel-plugin-macros": "^3.0.1"
   },
   "devDependencies": {
