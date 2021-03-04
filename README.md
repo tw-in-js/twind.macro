@@ -1,3 +1,7 @@
+> This package is been moved into [tw-in-js/twind-jsx-preprocessor:packages/macro](https://github.com/tw-in-js/twind-jsx-preprocessor/tree/main/packages/macro).
+>
+> Please check out the new [tw-in-js/twind-jsx-preprocessor](https://github.com/tw-in-js/twind-jsx-preprocessor) monorepo.
+
 # @twind/macro
 
 Enables the use of the `tw` prop, for use with [`twind`](https://github.com/tw-in-js/twind)
